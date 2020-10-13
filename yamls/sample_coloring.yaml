@@ -1,0 +1,37 @@
+id: SampleColoring-{VER}
+meta:
+  title: Sample Coloring {VER}
+  subtitle: >-
+    Super-impose the value of a selected sample metadata onto the sample scatter plot
+  description: >
+    Super-impose the value of a selected sample metadata onto the sample scatter plot
+endpoints:
+  backend:
+    cmd: python ./sample_coloring.py
+    type: docker
+    image: {GBOX}
+frontend:
+  args:
+    - type: select
+      injectInto: coloring_type
+      default: categorical
+      label: The type of the sample metadata
+      choices:
+        - value: 'categorical'
+          label: 'Categorical (shown with distinct colors)'
+          description: 'Values like [a, a, b, b, c, c, ...]'
+        - value: 'continuous'
+          label: 'Continuous (shown with a continuous color map)'
+          description: 'Values like [1.32, 0.64, 3.23, ...]'
+    - type: number
+      injectInto: bounding_stdev
+      default: 1.0
+      label: Bounding box factor times standard deviation (0.0 will be the convex hull)
+      description: The size of the bounding box around each cluster within this factor times the standard deviation of the cluster.
+  imports:
+    - kind: sampleCoords
+      label: Visualization data to plot
+      injectInto: viz_data
+    - kind: sampleMeta
+      label: Values to use as colors
+      injectInto: value
