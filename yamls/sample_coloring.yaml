@@ -25,9 +25,13 @@ frontend:
           description: 'Values like [1.32, 0.64, 3.23, ...]'
     - type: number
       injectInto: bounding_stdev
-      default: 1.0
-      label: Bounding box factor times standard deviation (0.0 will be the convex hull)
+      default: 0.1
+      label: Bounding box factor times standard deviation (value should be > 0.0; 0.0 will be the convex hull)
       description: The size of the bounding box around each cluster within this factor times the standard deviation of the cluster.
+    - type: number
+      injectInto: font
+      default: 9.0
+      label: The fontsize of the labels
   imports:
     - kind: sampleCoords
       label: Visualization data to plot

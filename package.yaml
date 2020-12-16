@@ -1,9 +1,9 @@
-id: official_py_docker-{VER}
+id: samplecoloring-{VER}
 
 meta:
   maintainer:
-    name: Xun Zhu
-    email: zhuxun@gmail.com
+    name: GranatumX
+    email: lana.garmire.group@gmail.com
 
 gboxes:
   - ./yamls/sample_coloring.yaml
