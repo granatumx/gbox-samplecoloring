@@ -8,12 +8,15 @@ from scipy.spatial import ConvexHull
 from colour import Color
 from matplotlib.patches import Polygon
 import statistics as st
+import time
 
 from granatum_sdk import Granatum
 
 COLORS = ["#3891ea", "#29ad19", "#ac2d58", "#db7580", "#ed2310", "#ca2dc2", "#5f7575", "#7cc1b5", "#c3bd78", "#4ffa24"]
 
 def main():
+    tic = time.perf_counter()
+
     gn = Granatum()
     sample_coords = gn.get_import("viz_data")
     value = gn.get_import("value")
@@ -81,9 +84,10 @@ def main():
                     for pt in ptslist:
                         if(pt[1] < lowestpt[1]):
                             lowestpt = pt
-                    poly = Polygon(1.1*(np.array(ptslist)-cent)+cent, facecolor=color)
-                    poly.set_capstyle('round')
-                    plt.gca().add_patch(poly)
+                    if bounding_stdev >= 0.0:
+                        poly = Polygon(1.1*(np.array(ptslist)-cent)+cent, facecolor=color)
+                        poly.set_capstyle('round')
+                        plt.gca().add_patch(poly)
                     plt.text(lowestpt[0], lowestpt[1]-scaley*10, cat, fontsize=font, ha="center", va="center", color="black", bbox=dict(boxstyle="round",fc=whitetransparent,ec=coloropaque))
                 for j,x in enumerate(listcats):
                     if x == cat:
@@ -107,6 +111,12 @@ def main():
             height=650,
             savefig_kwargs={'bbox_inches': 'tight'}
         )
+
+        toc = time.perf_counter()
+        time_passed = round(toc - tic, 2)
+
+        timing = "* Finished sample coloring step in {} seconds*".format(time_passed)
+        gn.add_result(timing, "markdown")
 
         gn.commit()
 
