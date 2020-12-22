@@ -70,7 +70,7 @@ def main():
                         for j, ln in enumerate(lengs):
                             if(ln - avgleng < stdleng):
                                 rpts.append(pts[j])
-                    pts = rpts
+                        pts = rpts
                     cent = np.mean(pts, axis=0)
                     hull = ConvexHull(pts)
                     ptslist = []
@@ -84,10 +84,9 @@ def main():
                     for pt in ptslist:
                         if(pt[1] < lowestpt[1]):
                             lowestpt = pt
-                    if bounding_stdev >= 0.0:
-                        poly = Polygon(1.1*(np.array(ptslist)-cent)+cent, facecolor=color)
-                        poly.set_capstyle('round')
-                        plt.gca().add_patch(poly)
+                    poly = Polygon(1.1*(np.array(ptslist)-cent)+cent, facecolor=color)
+                    poly.set_capstyle('round')
+                    plt.gca().add_patch(poly)
                     plt.text(lowestpt[0], lowestpt[1]-scaley*10, cat, fontsize=font, ha="center", va="center", color="black", bbox=dict(boxstyle="round",fc=whitetransparent,ec=coloropaque))
                 for j,x in enumerate(listcats):
                     if x == cat:
