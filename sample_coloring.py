@@ -45,6 +45,7 @@ def main():
             maxy = max(list(df["y"]))
             scaley = (maxy-miny)/650
             print("Scaley = {}".format(scaley))
+            colorhash = {}
 
             for i, cat in enumerate(df["value"].unique()):
                 dff = df[df["value"] == cat]
@@ -57,6 +58,7 @@ def main():
                 #plt.scatter(x=dff["x"], y=dff["y"], s=5000 / df.shape[0], c=abs(hash(cat)) % 256, cmap=COLORS2, label=cat)
                 #abs(hash(cat))
                 colorindex = randrange(256) % 256
+                colorhash[cat] = colorindex
                 craw = COLORS2(colorindex/255.0)
                 color = (craw[0], craw[1], craw[2], 0.2)
                 whitetransparent = (1, 1, 1, 0.5)
@@ -93,7 +95,8 @@ def main():
                     plt.text(lowestpt[0], lowestpt[1]-scaley*10, cat, fontsize=font, ha="center", va="center", color="black", bbox=dict(boxstyle="round",fc=whitetransparent,ec=coloropaque))
                 for j,x in enumerate(listcats):
                     if x == cat:
-                        carr[j] = int(abs(hash(cat)) % 256)
+                        carr[j] = colorhash[cat]
+                        #int(abs(hash(cat)) % 256)
             
             plt.scatter(x=df["x"], y=df["y"], s=5000 / df.shape[0], c=carr, cmap=COLORS2)
             lgd = plt.legend(markerscale=6, loc='upper center', bbox_to_anchor=(0.5, -0.05), ncol=5)
