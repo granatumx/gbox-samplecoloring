@@ -9,6 +9,7 @@ from colour import Color
 from matplotlib.patches import Polygon
 import statistics as st
 import time
+from random import randrange
 
 from granatum_sdk import Granatum
 
@@ -54,7 +55,8 @@ def main():
                 #plt.scatter(x=dff["x"], y=dff["y"], s=5000 / df.shape[0], c=COLORS[i].hex_l, label=cat)
                 #plt.scatter(x=dff["x"], y=dff["y"], s=5000 / df.shape[0], c=[abs(hash(cat)) % 256]*len(dff["x"]), cmap=COLORS2, label=cat)
                 #plt.scatter(x=dff["x"], y=dff["y"], s=5000 / df.shape[0], c=abs(hash(cat)) % 256, cmap=COLORS2, label=cat)
-                colorindex = abs(hash(cat)) % 256
+                #abs(hash(cat))
+                colorindex = randrange(256) % 256
                 craw = COLORS2(colorindex/255.0)
                 color = (craw[0], craw[1], craw[2], 0.2)
                 whitetransparent = (1, 1, 1, 0.5)
