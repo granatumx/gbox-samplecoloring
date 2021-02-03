@@ -95,7 +95,7 @@ def main():
                     plt.text(lowestpt[0], lowestpt[1]-scaley*10, cat, fontsize=font, ha="center", va="center", color="black", bbox=dict(boxstyle="round",fc=whitetransparent,ec=coloropaque))
                 for j,x in enumerate(listcats):
                     if x == cat:
-                        carr[j] = colorhash[cat]
+                        carr[j] = colorhash[cat] / 256.0
                         #int(abs(hash(cat)) % 256)
             
             plt.scatter(x=df["x"], y=df["y"], s=5000 / df.shape[0], c=carr, cmap=COLORS2)
