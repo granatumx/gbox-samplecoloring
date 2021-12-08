@@ -92,7 +92,7 @@ def main():
                         poly = Polygon(1.1*(np.array(ptslist)-cent)+cent, facecolor=color)
                         poly.set_capstyle('round')
                         plt.gca().add_patch(poly)
-                    plt.text(lowestpt[0], lowestpt[1]-scaley*10, cat, fontsize=font, ha="center", va="center", color="black", bbox=dict(boxstyle="round",fc=whitetransparent,ec=coloropaque))
+                    plt.text(lowestpt[0], lowestpt[1]-scaley*10, cat, fontsize=font, fontname="Arial", ha="center", va="center", color="black", bbox=dict(boxstyle="round",fc=whitetransparent,ec=coloropaque))
                 for j,x in enumerate(listcats):
                     if x == cat:
                         carr[j] = colorhash[cat] / 256.0
@@ -105,8 +105,14 @@ def main():
             plt.scatter(x=df["x"], y=df["y"], s=5000 / df.shape[0], c=df["value"], cmap="Reds")
             plt.colorbar()
 
-        plt.xlabel(dim_names[0])
-        plt.ylabel(dim_names[1])
+        xmin, xmax = plt.gca().get_xlim()
+        ymin, ymax = plt.gca().get_ylim()
+        stepsizex=(xmax-xmin)/5.0
+        stepsizey=(ymax-ymin)/5.0
+        plt.xticks(np.arange(xmin, xmax+stepsizex, step=stepsizex), fontsize=font, fontname="Arial")
+        plt.yticks(np.arange(ymin, ymax+stepsizey, step=stepsizey), fontsize=font, fontname="Arial")
+        plt.xlabel(dim_names[0], fontsize=font, fontname="Arial")
+        plt.ylabel(dim_names[1], fontsize=font, fontname="Arial")
         # plt.tight_layout()
 
         gn.add_current_figure_to_results(
