@@ -115,11 +115,15 @@ def main():
         plt.ylabel(dim_names[1], fontsize=font, fontname="Arial")
         # plt.tight_layout()
 
+        target_dpi=300
+        target_width=7.5 # inches
+        target_height=6.5 # inches
+
         gn.add_current_figure_to_results(
             "Scatter-plot",
-            dpi=75,
-            width=750,
-            height=650,
+            dpi=target_dpi,
+            width=target_width*target_dpi,
+            height=target_height*target_dpi,
             savefig_kwargs={'bbox_inches': 'tight'}
         )
 
