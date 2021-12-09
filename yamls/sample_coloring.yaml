@@ -26,6 +26,7 @@ frontend:
     - type: number
       injectInto: bounding_stdev
       default: 0.1
+      step: 0.00001
       label: Bounding box factor times standard deviation (value should be > 0.0; 0.0 will be the convex hull; < 0 no bbox)
       description: The size of the bounding box around each cluster within this factor times the standard deviation of the cluster.
     - type: number
