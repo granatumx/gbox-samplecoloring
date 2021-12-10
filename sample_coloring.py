@@ -9,6 +9,7 @@ from colour import Color
 from matplotlib.patches import Polygon
 import statistics as st
 import time
+import random
 from random import randrange
 
 from granatum_sdk import Granatum
@@ -27,6 +28,7 @@ def main():
 
     coords = sample_coords.get("coords")
     dim_names = sample_coords.get("dimNames")
+    random.seed(gn.get_arg('random_seed'))
 
     df = pd.DataFrame(
         {"x": [a[0] for a in coords.values()], "y": [a[1] for a in coords.values()], "value": pd.Series(value)},
@@ -47,7 +49,7 @@ def main():
             print("Scaley = {}".format(scaley))
             colorhash = {}
 
-            for i, cat in enumerate(df["value"].unique()):
+            for i, cat in enumerate(uniq):
                 dff = df[df["value"] == cat]
                 xs = list(dff["x"])
                 ys = list(dff["y"])

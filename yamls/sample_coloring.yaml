@@ -33,6 +33,12 @@ frontend:
       injectInto: font
       default: 9.0
       label: The fontsize of the labels
+    - type: seed
+      injectInto: random_seed
+      label: Random seed
+      description: >-
+        The colors are selected randomly. Use a random seed to keep the same colors.
+      default: 13513
   imports:
     - kind: sampleCoords
       label: Visualization data to plot
