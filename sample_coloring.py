@@ -64,6 +64,7 @@ def main():
                 #abs(hash(cat))
                 colorindex = (coffset + grouptocolor[i]) % 256
                 colorhash[cat] = colorindex
+                print("Color index = ", colorindex)
                 craw = COLORS2((colorindex+0.0)/256.0)
                 clr = [craw[0], craw[1], craw[2], 0.2]
                 print("Color = ", clr, flush=True)
