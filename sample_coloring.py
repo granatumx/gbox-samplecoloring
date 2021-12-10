@@ -64,7 +64,7 @@ def main():
                 #abs(hash(cat))
                 colorindex = (coffset + grouptocolor[i]) % 255
                 colorhash[cat] = colorindex
-                craw = COLORS2(colorindex/255.0)
+                craw = COLORS2(colorindex)
                 color = (craw[0], craw[1], craw[2], 0.2)
                 whitetransparent = (1, 1, 1, 0.5)
                 coloropaque = (craw[0], craw[1], craw[2], 1.0)
