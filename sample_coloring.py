@@ -62,7 +62,7 @@ def main():
                 #plt.scatter(x=dff["x"], y=dff["y"], s=5000 / df.shape[0], c=[abs(hash(cat)) % 256]*len(dff["x"]), cmap=COLORS2, label=cat)
                 #plt.scatter(x=dff["x"], y=dff["y"], s=5000 / df.shape[0], c=abs(hash(cat)) % 256, cmap=COLORS2, label=cat)
                 #abs(hash(cat))
-                colorindex = (coffset + grouptocolor[i]) % 256
+                colorindex = (coffset + grouptocolor[i]*colorstep) % 256
                 colorhash[cat] = colorindex
                 print("Color index = ", colorindex)
                 craw = COLORS2((colorindex+0.0)/256.0)
