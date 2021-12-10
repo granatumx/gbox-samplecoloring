@@ -65,9 +65,9 @@ def main():
                 colorindex = (coffset + grouptocolor[i]) % 256
                 colorhash[cat] = colorindex
                 craw = COLORS2((colorindex+0.0)/256.0)
-                clr = (craw[0], craw[1], craw[2], 0.2)
-                whitetransparent = (1, 1, 1, 0.5)
-                coloropaque = (craw[0], craw[1], craw[2], 1.0)
+                clr = [craw[0], craw[1], craw[2], 0.2]
+                whitetransparent = [1.0, 1.0, 1.0, 0.5]
+                coloropaque = [craw[0], craw[1], craw[2], 1.0]
                 if len(xs)>3:
                     pts = list(zip(xs, ys))
                     cent = np.mean(pts, axis=0)
