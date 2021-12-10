@@ -66,6 +66,7 @@ def main():
                 colorhash[cat] = colorindex
                 craw = COLORS2((colorindex+0.0)/256.0)
                 clr = [craw[0], craw[1], craw[2], 0.2]
+                print("Color = ", clr);
                 whitetransparent = [1.0, 1.0, 1.0, 0.5]
                 coloropaque = [craw[0], craw[1], craw[2], 1.0]
                 if len(xs)>3:
@@ -97,9 +98,9 @@ def main():
                         poly = Polygon(1.1*(np.array(ptslist)-cent)+cent, facecolor=clr)
                         poly.set_capstyle('round')
                         plt.gca().add_patch(poly)
-                        plt.gca().add_artist(poly)
+                        poly.set_color(clr)
                     txt = plt.text(lowestpt[0], lowestpt[1]-scaley*10, cat, fontsize=font, fontname="Arial", ha="center", va="center", color="black", bbox=dict(boxstyle="round",fc=whitetransparent,ec=coloropaque))
-                    plt.gca().add_artist(txt)
+                    # plt.gca().add_artist(txt)
                 for j,x in enumerate(listcats):
                     if x == cat:
                         carr[j] = colorhash[cat]
