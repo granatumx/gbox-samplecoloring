@@ -66,7 +66,8 @@ def main():
                 colorhash[cat] = colorindex
                 craw = COLORS2((colorindex+0.0)/256.0)
                 clr = [craw[0], craw[1], craw[2], 0.2]
-                print("Color = ", clr);
+                print("Color = ", clr, flush=True)
+                time.sleep(1)
                 whitetransparent = [1.0, 1.0, 1.0, 0.5]
                 coloropaque = [craw[0], craw[1], craw[2], 1.0]
                 if len(xs)>3:
