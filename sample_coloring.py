@@ -48,7 +48,7 @@ def main():
             scaley = (maxy-miny)/650
             print("Scaley = {}".format(scaley))
             colorhash = {}
-            colorstep = np.ceil(256/num)
+            colorstep = np.ceil(256.0/num)
             coffset = randrange(colorstep)
             grouptocolor = np.random.choice(np.arange(num), num, replace=False)
 
@@ -62,10 +62,10 @@ def main():
                 #plt.scatter(x=dff["x"], y=dff["y"], s=5000 / df.shape[0], c=[abs(hash(cat)) % 256]*len(dff["x"]), cmap=COLORS2, label=cat)
                 #plt.scatter(x=dff["x"], y=dff["y"], s=5000 / df.shape[0], c=abs(hash(cat)) % 256, cmap=COLORS2, label=cat)
                 #abs(hash(cat))
-                colorindex = (coffset + grouptocolor[i]) % 255
+                colorindex = (coffset + grouptocolor[i]) % 256
                 colorhash[cat] = colorindex
-                craw = COLORS2(colorindex)
-                color = (craw[0], craw[1], craw[2], 0.2)
+                craw = COLORS2((colorindex+0.0)/256.0)
+                clr = (craw[0], craw[1], craw[2], 0.2)
                 whitetransparent = (1, 1, 1, 0.5)
                 coloropaque = (craw[0], craw[1], craw[2], 1.0)
                 if len(xs)>3:
@@ -94,7 +94,7 @@ def main():
                         if(pt[1] < lowestpt[1]):
                             lowestpt = pt
                     if(bounding_stdev >= 0.0):
-                        poly = Polygon(1.1*(np.array(ptslist)-cent)+cent, facecolor=color)
+                        poly = Polygon(1.1*(np.array(ptslist)-cent)+cent, facecolor=clr)
                         poly.set_capstyle('round')
                         plt.gca().add_patch(poly)
                     plt.text(lowestpt[0], lowestpt[1]-scaley*10, cat, fontsize=font, fontname="Arial", ha="center", va="center", color="black", bbox=dict(boxstyle="round",fc=whitetransparent,ec=coloropaque))
