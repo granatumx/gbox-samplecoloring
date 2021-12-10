@@ -33,6 +33,15 @@ frontend:
       injectInto: font
       default: 9.0
       label: The fontsize of the labels
+    - type: select
+      injectInto: label_location
+      default: 'bottom'
+      label: Placement location of labels
+      choices:
+        - value: 'bottom'
+          label: 'Bottom of bounding box'
+        - value: 'random'
+          label: 'Random on convex hull'
     - type: seed
       injectInto: random_seed
       label: Random seed

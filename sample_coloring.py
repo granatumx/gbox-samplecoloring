@@ -24,6 +24,7 @@ def main():
     value = gn.get_import("value")
     coloring_type = gn.get_arg("coloring_type")
     bounding_stdev = gn.get_arg("bounding_stdev")
+    label_location = gn.get_arg("label_location")
     font = gn.get_arg('font')
 
     coords = sample_coords.get("coords")
@@ -90,9 +91,12 @@ def main():
                     ptslist = ptslist[0::2]
                     ptslist.insert(len(ptslist), ptslist[0])
                     lowestpt = ptslist[0]
-                    for pt in ptslist:
-                        if(pt[1] < lowestpt[1]):
-                            lowestpt = pt
+                    if label_location == 'bottom':
+                        for pt in ptslist:
+                            if(pt[1] < lowestpt[1]):
+                                lowestpt = pt
+                    else:
+                        lowestpt = ptslist[randrange(len(ptslist))]
                     if(bounding_stdev >= 0.0):
                         poly = Polygon(1.1*(np.array(ptslist)-cent)+cent, facecolor=clr)
                         poly.set_capstyle('round')
