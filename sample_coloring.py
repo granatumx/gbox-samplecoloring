@@ -48,6 +48,9 @@ def main():
             scaley = (maxy-miny)/650
             print("Scaley = {}".format(scaley))
             colorhash = {}
+            colorstep = np.ceil(256/num)
+            coffset = randrange(colorstep)
+            grouptocolor = np.random.choice(np.arange(num), num, replace=False)
 
             for i, cat in enumerate(uniq):
                 dff = df[df["value"] == cat]
@@ -59,7 +62,7 @@ def main():
                 #plt.scatter(x=dff["x"], y=dff["y"], s=5000 / df.shape[0], c=[abs(hash(cat)) % 256]*len(dff["x"]), cmap=COLORS2, label=cat)
                 #plt.scatter(x=dff["x"], y=dff["y"], s=5000 / df.shape[0], c=abs(hash(cat)) % 256, cmap=COLORS2, label=cat)
                 #abs(hash(cat))
-                colorindex = randrange(256) % 256
+                colorindex = (coffset + grouptocolor[i]) % 255
                 colorhash[cat] = colorindex
                 craw = COLORS2(colorindex/255.0)
                 color = (craw[0], craw[1], craw[2], 0.2)
