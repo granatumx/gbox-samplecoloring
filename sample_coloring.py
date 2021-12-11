@@ -38,6 +38,12 @@ def main():
         index=coords.keys()
     )
 
+    target_dpi=300
+    target_width=7.5 # inches
+    target_height=6.5 # inches
+    font_size_in_in=font/72.0 # inches
+    font_size_in_px=font_size_in_in*target_dpi
+
     try:
 
         if coloring_type == "categorical":
@@ -48,7 +54,7 @@ def main():
             listcats = list(df["value"])     
             miny = min(list(df["y"]))
             maxy = max(list(df["y"]))
-            scaley = (maxy-miny)/650
+            scaley = (maxy-miny)/target_height
             print("Scaley = {}".format(scaley))
             colorhash = {}
             colorstep = np.ceil(256.0/num)
@@ -107,8 +113,7 @@ def main():
                     label_text = cat
                     if label_transform == "numbers":
                         label_text = re.sub("[^0-9]", "", cat)
-                    txt = plt.text(lowestpt[0], lowestpt[1], label_text, fontsize=font, fontname="Arial", ha="center", va="center", color="black", bbox=dict(boxstyle="round",fc=whitetransparent,ec=coloropaque))
-                    txt.set_y(lowestpt[1] - txt.get_window_extent().height/2.0*scaley)
+                    txt = plt.text(lowestpt[0], lowestpt[1]-font_size_in_px/2.0, label_text, fontsize=font, fontname="Arial", ha="center", va="center", color="black", bbox=dict(boxstyle="round",fc=whitetransparent,ec=coloropaque))
                     # plt.gca().add_artist(txt)
                 for j,x in enumerate(listcats):
                     if x == cat:
@@ -132,10 +137,6 @@ def main():
         plt.xlabel(dim_names[0], fontsize=font, fontname="Arial")
         plt.ylabel(dim_names[1], fontsize=font, fontname="Arial")
         # plt.tight_layout()
-
-        target_dpi=300
-        target_width=7.5 # inches
-        target_height=6.5 # inches
 
         gn.add_current_figure_to_results(
             "Scatter-plot",
