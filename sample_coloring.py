@@ -54,7 +54,7 @@ def main():
             listcats = list(df["value"])     
             miny = min(list(df["y"]))
             maxy = max(list(df["y"]))
-            scaley = (maxy-miny)/target_height
+            scaley = (maxy-miny)/(target_height*target_dpi)
             print("Scaley = {}".format(scaley))
             colorhash = {}
             colorstep = np.ceil(256.0/num)
@@ -113,7 +113,7 @@ def main():
                     label_text = cat
                     if label_transform == "numbers":
                         label_text = re.sub("[^0-9]", "", cat)
-                    txt = plt.text(lowestpt[0], lowestpt[1]-font_size_in_px/2.0, label_text, fontsize=font, fontname="Arial", ha="center", va="center", color="black", bbox=dict(boxstyle="round",fc=whitetransparent,ec=coloropaque))
+                    txt = plt.text(lowestpt[0], lowestpt[1]-scaley*font_size_in_px/2.0, label_text, fontsize=font, fontname="Arial", ha="center", va="center", color="black", bbox=dict(boxstyle="round",fc=whitetransparent,ec=coloropaque))
                     # plt.gca().add_artist(txt)
                 for j,x in enumerate(listcats):
                     if x == cat:
