@@ -25,6 +25,7 @@ def main():
     coloring_type = gn.get_arg("coloring_type")
     bounding_stdev = gn.get_arg("bounding_stdev")
     label_location = gn.get_arg("label_location")
+    label_transform = gn.get_arg("label_transform")
     font = gn.get_arg('font')
 
     coords = sample_coords.get("coords")
@@ -102,7 +103,10 @@ def main():
                         poly.set_capstyle('round')
                         plt.gca().add_patch(poly)
                         poly.set_color(clr)
-                    txt = plt.text(lowestpt[0], lowestpt[1]-scaley*10, cat, fontsize=font, fontname="Arial", ha="center", va="center", color="black", bbox=dict(boxstyle="round",fc=whitetransparent,ec=coloropaque))
+                    label_text = cat
+                    if label_transform == "numbers":
+                        label_text = re.sub("[^0-9]", "", cat)
+                    txt = plt.text(lowestpt[0], lowestpt[1]-scaley*10, label_text, fontsize=font, fontname="Arial", ha="center", va="center", color="black", bbox=dict(boxstyle="round",fc=whitetransparent,ec=coloropaque))
                     # plt.gca().add_artist(txt)
                 for j,x in enumerate(listcats):
                     if x == cat:

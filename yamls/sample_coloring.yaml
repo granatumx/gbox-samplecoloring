@@ -42,6 +42,15 @@ frontend:
           label: 'Bottom of bounding box'
         - value: 'random'
           label: 'Random on convex hull'
+    - type: select
+      injectInto: label_transform
+      default: 'none'
+      label: Transform the label text (to improve appearance in dense plots)
+      choices:
+        - value: 'none'
+          label: 'Do not transform the label text'
+        - value: 'numbers'
+          label: 'Numbers only from label text'
     - type: seed
       injectInto: random_seed
       label: Random seed
