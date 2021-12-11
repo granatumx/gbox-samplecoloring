@@ -10,6 +10,7 @@ from matplotlib.patches import Polygon
 import statistics as st
 import time
 import random
+import re
 from random import randrange
 
 from granatum_sdk import Granatum
@@ -106,7 +107,7 @@ def main():
                     label_text = cat
                     if label_transform == "numbers":
                         label_text = re.sub("[^0-9]", "", cat)
-                    txt = plt.text(lowestpt[0], lowestpt[1]-scaley*10, label_text, fontsize=font, fontname="Arial", ha="center", va="center", color="black", bbox=dict(boxstyle="round",fc=whitetransparent,ec=coloropaque))
+                    plt.text(lowestpt[0], lowestpt[1]-scaley*10, label_text, fontsize=font, fontname="Arial", ha="center", va="center", color="black", bbox=dict(boxstyle="round",fc=whitetransparent,ec=coloropaque))
                     # plt.gca().add_artist(txt)
                 for j,x in enumerate(listcats):
                     if x == cat:
