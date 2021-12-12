@@ -47,7 +47,8 @@ def main():
     try:
 
         if coloring_type == "categorical":
-            uniq = df["value"].unique();
+            uniq, indices = df["value"].unique(return_index=True)
+            # uniq = df["value"].unique()
             num = uniq.shape[0]
             COLORS2 = plt.get_cmap('gist_rainbow')
             carr = [0]*df.shape[0]
@@ -61,7 +62,8 @@ def main():
             coffset = randrange(colorstep)
             grouptocolor = np.random.choice(np.arange(num), num, replace=False)
 
-            for i, cat in enumerate(uniq):
+            for i, idx in enumerate(indices): #, cat in enumerate(uniq):
+                cat = df["value"][idx]
                 dff = df[df["value"] == cat]
                 xs = list(dff["x"])
                 ys = list(dff["y"])
