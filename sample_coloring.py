@@ -31,7 +31,9 @@ def main():
 
     coords = sample_coords.get("coords")
     dim_names = sample_coords.get("dimNames")
-    random.seed(gn.get_arg('random_seed'))
+    seed = gn.get_arg('random_seed')
+    random.seed(seed)
+    np.random.seed(seed)
 
     df = pd.DataFrame(
         {"x": [a[0] for a in coords.values()], "y": [a[1] for a in coords.values()], "value": pd.Series(value)},
