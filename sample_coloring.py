@@ -47,7 +47,8 @@ def main():
     try:
 
         if coloring_type == "categorical":
-            uniq = df["value"].unique().sort(kind="stable")
+            uniq = df["value"].unique()
+            uniq.sort(kind="stable")
             num = uniq.shape[0]
             COLORS2 = plt.get_cmap('gist_rainbow')
             carr = [0]*df.shape[0]
