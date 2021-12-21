@@ -51,6 +51,24 @@ frontend:
           label: 'Do not transform the label text'
         - value: 'numbers'
           label: 'Numbers only from label text'
+    - type: text
+      label: X-axis label, leave blank to use plotting tool axis label
+      default: ""
+      injectInto: labelXaxis
+    - type: text
+      label: Y-axis label, leave blank to use plotting tool axis label
+      default: ""
+      injectInto: labelYaxis
+    - type: number
+      injectInto: numticks
+      default: 5
+      step: 1
+      label: The number of ticks for X-axis and Y-axis
+    - type: number
+      injectInto: sigfigs
+      default: 2
+      step: 1
+      label: The number of significant figures for X-axis and Y-axis ticks (0 for integers)
     - type: seed
       injectInto: random_seed
       label: Random seed

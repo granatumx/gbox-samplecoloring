@@ -17,6 +17,19 @@ from granatum_sdk import Granatum
 
 COLORS = ["#3891ea", "#29ad19", "#ac2d58", "#db7580", "#ed2310", "#ca2dc2", "#5f7575", "#7cc1b5", "#c3bd78", "#4ffa24"]
 
+def resetArray(minX, maxX, numsteps, numsigfigs):
+    powten = 10**numsigfigs
+    minX = minX*powten
+    maxX = maxX*powten
+    newMinX = np.floor(minX)
+    newMaxX = np.ceil(maxX)
+    stepsize = np.ceil((newMaxX-newMinX)/(numsteps-1.0))
+    newMaxX = newMinX+stepsize*(numsteps-1.0)
+    midNew = (newMaxX+newMinX)/2.0
+    midOld = (maxX+minX)/2.0
+    shift = np.round(midOld-midNew)
+    return np.arange(newMinX+shift, newMaxX+stepsize+shift, step=stepsize)/powten
+
 def main():
     tic = time.perf_counter()
 
@@ -27,6 +40,10 @@ def main():
     bounding_stdev = gn.get_arg("bounding_stdev")
     label_location = gn.get_arg("label_location")
     label_transform = gn.get_arg("label_transform")
+    labelXaxis = gn.get_arg("labelXaxis")
+    labelYaxis = gn.get_arg("labelYaxis")
+    sigfigs = gn.get_arg("sigfigs")
+    numticks = gn.get_arg("numticks")
     font = gn.get_arg('font')
 
     coords = sample_coords.get("coords")
@@ -133,10 +150,16 @@ def main():
 
         xmin, xmax = plt.gca().get_xlim()
         ymin, ymax = plt.gca().get_ylim()
-        stepsizex=(xmax-xmin)/5.0
-        stepsizey=(ymax-ymin)/5.0
-        plt.xticks(np.arange(xmin, xmax+stepsizex, step=stepsizex), fontsize=font, fontname="Arial")
-        plt.yticks(np.arange(ymin, ymax+stepsizey, step=stepsizey), fontsize=font, fontname="Arial")
+        # stepsizex=(xmax-xmin)/numticks
+        # stepsizey=(ymax-ymin)/numticks
+        xtickArray = resetArray(xmin, xmax, numticks, sigfigs)
+        ytickArray = resetArray(ymin, ymax, numticks, sigfigs)
+        # plt.xticks(np.arange(xmin, xmax+stepsizex, step=stepsizex), fontsize=font, fontname="Arial")
+        # plt.yticks(np.arange(ymin, ymax+stepsizey, step=stepsizey), fontsize=font, fontname="Arial")
+        plt.xlim(xtickArray[0], xtickArray[-1])
+        plt.ylim(ytickArray[0], ytickArray[-1])
+        plt.xticks(xtickArray, fontsize=font, fontname="Arial")
+        plt.yticks(ytickArray, fontsize=font, fontname="Arial")
         plt.xlabel(dim_names[0], fontsize=font, fontname="Arial")
         plt.ylabel(dim_names[1], fontsize=font, fontname="Arial")
         # plt.tight_layout()
