@@ -160,8 +160,16 @@ def main():
         plt.ylim(ytickArray[0], ytickArray[-1])
         plt.xticks(xtickArray, fontsize=font, fontname="Arial")
         plt.yticks(ytickArray, fontsize=font, fontname="Arial")
-        plt.xlabel(dim_names[0], fontsize=font, fontname="Arial")
-        plt.ylabel(dim_names[1], fontsize=font, fontname="Arial")
+        if labelXaxis == "":
+            plt.xlabel(dim_names[0], fontsize=font, fontname="Arial")
+        else:
+            plt.xlabel(labelXaxis, fontsize=font, fontname="Arial")
+
+        if labelYaxis == "":
+            plt.ylabel(dim_names[1], fontsize=font, fontname="Arial")
+        else:
+            plt.ylabel(labelYaxis, fontsize=font, fontname="Arial")
+
         # plt.tight_layout()
 
         gn.add_current_figure_to_results(
