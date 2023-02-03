@@ -83,6 +83,8 @@ def main():
 
             for i, cat in enumerate(uniq):
                 dff = df[df["value"] == cat]
+                if dff.shape[1] < 1:
+                    continue
                 xs = list(dff["x"])
                 ys = list(dff["y"])
                 #avgx = sum(dff["x"]) / len(dff["x"]) 
