@@ -153,7 +153,7 @@ def main():
             plt.scatter(x=df["x"], y=df["y"], s=5000 / df.shape[0], c=carr, cmap=COLORS2)
             #lgd = plt.legend(markerscale=6, loc='upper center', bbox_to_anchor=(0.5, -0.05), ncol=5)
             if label_location == "legend":
-                plt.legend(handles=legend_handles, loc='upper center', bbox_to_anchor=(1.05, 1), ncol=5)
+                plt.legend(handles=legend_handles, loc='center right', bbox_to_anchor=(1, 1))
         elif coloring_type == "continuous":
             plt.scatter(x=df["x"], y=df["y"], s=5000 / df.shape[0], c=df["value"], cmap="Reds")
             plt.colorbar()
