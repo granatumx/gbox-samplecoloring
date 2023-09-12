@@ -42,6 +42,8 @@ frontend:
           label: 'Bottom of bounding box'
         - value: 'random'
           label: 'Random on convex hull'
+        - value: 'legend'
+          label: 'Place in a legend'
     - type: select
       injectInto: label_transform
       default: 'none'

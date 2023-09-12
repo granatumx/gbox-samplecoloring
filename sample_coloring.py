@@ -6,6 +6,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from scipy.spatial import ConvexHull
 from colour import Color
+import matplotlib.patches as mpatches
 from matplotlib.patches import Polygon
 import statistics as st
 import time
@@ -81,6 +82,8 @@ def main():
             coffset = randrange(colorstep)
             grouptocolor = np.random.choice(np.arange(num), num, replace=False)
 
+            legend_handles = []
+
             for i, cat in enumerate(uniq):
                 dff = df[df["value"] == cat]
                 if dff.shape[1] < 1:
@@ -135,7 +138,11 @@ def main():
                     label_text = cat
                     if label_transform == "numbers":
                         label_text = re.sub("[^0-9]", "", cat)
-                    txt = plt.text(lowestpt[0], lowestpt[1]-scaley*font_size_in_px*1.2, label_text, fontsize=font, fontname="Arial", ha="center", va="center", color="black", bbox=dict(boxstyle="round",fc=whitetransparent,ec=coloropaque))
+                    if label_location == 'legend':
+                        patch = mpatches.Patch(color=coloropaque, label=label_text)
+                        legend_handles.append(patch)
+                    else:
+                        txt = plt.text(lowestpt[0], lowestpt[1]-scaley*font_size_in_px*1.2, label_text, fontsize=font, fontname="Arial", ha="center", va="center", color="black", bbox=dict(boxstyle="round",fc=whitetransparent,ec=coloropaque))
                     # plt.gca().add_artist(txt)
                 for j,x in enumerate(listcats):
                     if x == cat:
@@ -144,8 +151,9 @@ def main():
                         #int(abs(hash(cat)) % 256)
             
             plt.scatter(x=df["x"], y=df["y"], s=5000 / df.shape[0], c=carr, cmap=COLORS2)
-            lgd = plt.legend(markerscale=6, loc='upper center', bbox_to_anchor=(0.5, -0.05), ncol=5)
-    #60 / (5000 / df.shape[0])
+            #lgd = plt.legend(markerscale=6, loc='upper center', bbox_to_anchor=(0.5, -0.05), ncol=5)
+            if label_location == "legend":
+                plt.legend(handles=legend_handles, loc='upper center', bbox_to_anchor=(0.5, -0.05), ncol=5)
         elif coloring_type == "continuous":
             plt.scatter(x=df["x"], y=df["y"], s=5000 / df.shape[0], c=df["value"], cmap="Reds")
             plt.colorbar()
